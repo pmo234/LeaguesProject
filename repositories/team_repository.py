@@ -2,11 +2,11 @@ from db.run_sql import run_sql
 
 from models.team import Team
 from models.league import League
-
+import repositories.league_repository as league_repository
 
 def save(team):
-    sql = "INSERT INTO teams (name, wins,losses,draws,score ) VALUES (%s, %s, %s, %s, %s) RETURNING *"
-    values = [team.name, team.wins, team.losses, team.draws, team.score]
+    sql = "INSERT INTO teams (name, leagues_id, wins,losses,draws,score ) VALUES (%s, %s, %s, %s, %s, %s) RETURNING *"
+    values = [team.name, team.leagues.id, team.wins, team.losses, team.draws, team.score]
     results = run_sql(sql, values)
     id = results[0]['id']
     team.id = id
@@ -20,7 +20,8 @@ def select_all():
     results = run_sql(sql)
 
     for row in results:
-        team = Team(row['name'], row['wins'], row['losses'], row['draws'],row['score'], row['id'] )
+        league = league_repository.select(row['leagues_id'])
+        team = Team(row['name'], league, row['wins'], row['losses'], row['draws'],row['score'], row['id'] )
         teams.append(team)
     return teams
 
@@ -32,7 +33,8 @@ def select(id):
     result = run_sql(sql, values)[0]
 
     if result is not None:
-        team = Team(result['name'], result['wins'], result['losses'], result['draws'], result['score'], result['id'] )
+        league = league_repository.select(row['leagues_id'])
+        team = Team(result['name'], league, result['wins'], result['losses'], result['draws'], result['score'], result['id'] )
     return team
 
 
@@ -48,8 +50,8 @@ def delete(id):
 
 
 def update(team):
-    sql = "UPDATE teams SET (name, wins, losses, draws, score) = (%s, %s, %s, %s, %s) WHERE id = %s"
-    values = [team.name, team.wins, team.losses, team.draws,team.score, team.id]
+    sql = "UPDATE teams SET (name, leagues_id, wins, losses, draws, score) = (%s, %s, %s, %s, %s, %s) WHERE id = %s"
+    values = [team.name, team.leagues.id, team.wins, team.losses, team.draws,team.score, team.id]
     run_sql(sql, values)
 
 def leagues(team):

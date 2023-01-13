@@ -1,0 +1,14 @@
+{% extends "base.html" %}
+{% block content %}
+
+
+This is the leagues section 
+
+{%for team in all_teams%}
+    <div class="league">
+        {{team.name}}
+    </div>
+{%endfor %}
+
+{% endblock %}
+

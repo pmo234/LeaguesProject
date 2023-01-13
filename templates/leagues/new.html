@@ -1,0 +1,21 @@
+{% extends "base.html" %}
+{% block content %}
+<form action="/leagues" method="post">
+    <div>
+      <label for="name">Team Name:</label>
+      <input type="text" id="name" name="name" placeholder="team name" required autofocus>
+    </div>
+    
+    <div>
+        <label for="leagues">League:</label>
+        <select id="league" name="league_id">
+            {% for league in all_leagues %}
+            <option value="{{ league.id }}">{{ league.name }}</option>
+            {% endfor %}
+        </select>
+    </div>
+    
+    <button type="submit">Add Team</button>
+</form>
+
+{% endblock %}
