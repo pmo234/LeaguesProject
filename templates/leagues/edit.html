@@ -1,0 +1,41 @@
+{% extends "base.html" %}
+{% block content %}
+
+<form action="/leagues/{{team.id}}" method="post">
+  <div>
+    <label for="name">Team Name:</label>
+    <input type="text" id="name" name="name" value="{{team.name}}">
+  </div>
+  
+  <div>
+      <label for="leagues">League:</label>
+      <select id="league" name="league_id">
+          {% for league in all_leagues %}
+          <option value="{{ league.id }}">{{ league.name }}</option>
+          {% endfor %}
+      </select>
+  </div>
+
+  <div>
+    <label for="wins">Wins:</label>
+    <input type="number" id="wins" name="wins" value="{{team.wins}}" required>
+  </div>
+  <div>
+    <label for="losses">Losses:</label>
+    <input type="number" id="losses" name="losses" value="{{team.losses}}" required>
+  </div>
+  <div>
+    <label for="draws">Draws:</label>
+    <input type="number" id="draws" name="draws" value="{{team.draws}}" required>
+  </div>
+
+  
+  <button type="submit">Submit Team</button>
+  
+</form>
+<form class="delete-form" action="/leagues/{{team.id}}/delete" method="POST">
+  <button type="submit">Delete Team</button>
+</form>
+
+
+{% endblock %}

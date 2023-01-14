@@ -26,11 +26,38 @@ def new_team():
 def create_team():
     name = request.form['name']
     league_id = request.form['league_id']
-    wins    = 0
-    losses   = 0
-    draws   = 0
-    score   = 0
-    leagues   = league_repository.select(league_id)
-    team      = Team(name, leagues, wins, losses,draws,score)
+    wins = 0
+    losses = 0
+    draws = 0
+    score = 0
+    leagues = league_repository.select(league_id)
+    team = Team(name, leagues, wins, losses,draws,score)
     team_repository.save(team)
+    return redirect('/leagues')
+
+@leagues_blueprint.route("/leagues/<id>/edit", methods=['GET'])
+def edit_team(id):
+    team = team_repository.select(id)
+    leagues = league_repository.select_all()
+    return render_template('leagues/edit.html', team = team, all_leagues = leagues)
+
+@leagues_blueprint.route("/leagues/<id>",  methods=['POST'])
+def update_team(id):
+    
+    name = request.form['name']
+    league_id = request.form['league_id']
+    wins = request.form['wins']
+    losses = request.form['losses']
+    draws = request.form['draws']
+    score = 0
+    leagues = league_repository.select(league_id)
+    team = Team(name, leagues, wins, losses,draws,score,id)
+   
+    team_repository.update(team)
+    return redirect('/leagues')
+
+@leagues_blueprint.route("/leagues/<id>/delete", methods=['POST'])
+def delete_team(id):
+    print('delete controller')
+    team_repository.delete(id)
     return redirect('/leagues')

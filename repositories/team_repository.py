@@ -3,6 +3,7 @@ from db.run_sql import run_sql
 from models.team import Team
 from models.league import League
 import repositories.league_repository as league_repository
+import numpy as np
 
 def save(team):
     sql = "INSERT INTO teams (name, leagues_id, wins,losses,draws,score ) VALUES (%s, %s, %s, %s, %s, %s) RETURNING *"
@@ -16,14 +17,19 @@ def save(team):
 def select_all():
     teams = []
 
-    sql = "SELECT * FROM teams"
+    sql = "SELECT * FROM teams ORDER BY 3*wins + draws DESC"
     results = run_sql(sql)
 
-    for row in results:
-        league = league_repository.select(row['leagues_id'])
-        team = Team(row['name'], league, row['wins'], row['losses'], row['draws'],row['score'], row['id'] )
-        teams.append(team)
-    return teams
+    if teams == []:
+        for row in results:
+        
+            league = league_repository.select(row['leagues_id'])
+            team = Team(row['name'], league, row['wins'], row['losses'], row['draws'],row['score'], row['id'] )
+            team.calculate_score()
+            teams.append(team)
+        
+        return teams
+
 
 
 def select(id):
@@ -33,7 +39,7 @@ def select(id):
     result = run_sql(sql, values)[0]
 
     if result is not None:
-        league = league_repository.select(row['leagues_id'])
+        league = league_repository.select(result['leagues_id'])
         team = Team(result['name'], league, result['wins'], result['losses'], result['draws'], result['score'], result['id'] )
     return team
 
@@ -45,6 +51,7 @@ def delete_all():
 
 def delete(id):
     sql = "DELETE  FROM teams WHERE id = %s"
+    print("Deleting team")
     values = [id]
     run_sql(sql, values)
 

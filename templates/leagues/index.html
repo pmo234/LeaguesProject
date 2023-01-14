@@ -4,11 +4,54 @@
 
 This is the leagues section 
 
-{%for team in all_teams%}
-    <div class="league">
-        {{team.name}}
-    </div>
-{%endfor %}
+<div class="league">
+    League 1
+    <table>
+        <tr>
+            <th>Team</th>
+            <th>Wins</th>
+            <th>Draws</th>
+            <th>Losses</th>
+            <th>Points</th>
+        </tr>
+    {%for team in all_teams%}
+    {%if team.leagues.name == "League 1" %}
+    
+        <tr>
+          <td><a href="/leagues/{{team.id}}/edit">{{team.name}}</a></td>
+          <td>{{team.wins}}</td>
+          <td>{{team.draws}}</td>
+          <td>{{team.losses}}</td>
+          <td>{{team.score}}</td>
+        </tr>
+        {% endif %}
+        {% endfor %}
+    </table>
+</div>
+<div class="league">
+    League 2
+    <table>
+        <tr>
+            <th>Team</th>
+            <th>Wins</th>
+            <th>Draws</th>
+            <th>Losses</th>
+            <th>Points</th>
+        </tr>
+    {%for team in all_teams%}
+    {%if team.leagues.name == "League 2" %}
+    
+        <tr>
+          <td><a href="/leagues/{{team.id}}/edit">{{team.name}}</a></td>
+          <td>{{team.wins}}</td>
+          <td>{{team.draws}}</td>
+          <td>{{team.losses}}</td>
+          <td>{{team.score}}</td>
+        </tr>
+        {% endif %}
+        {% endfor %}
+    </table>
+</div>
 
 {% endblock %}
 

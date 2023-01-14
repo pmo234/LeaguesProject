@@ -7,3 +7,6 @@ class Team:
         self.draws = draws
         self.score = score
         self.id = id
+
+    def calculate_score(self):
+        self.score = self.wins*3 + self.draws

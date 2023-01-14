@@ -16,7 +16,7 @@ def save(league):
 
 def select_all():
     leagues = []
-
+    print('select all leagues activated')
     sql = "SELECT * FROM leagues"
     results = run_sql(sql)
 
