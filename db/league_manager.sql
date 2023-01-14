@@ -1,5 +1,6 @@
 DROP TABLE IF EXISTS leagues;
 DROP TABLE IF EXISTS teams;
+DROP TABLE IF EXISTS fixtures;
 
 
 CREATE TABLE leagues (
@@ -15,4 +16,13 @@ CREATE TABLE teams (
   losses INT,
   draws INT,
   score INT
+);
+
+CREATE TABLE fixtures (
+  id SERIAL PRIMARY KEY,
+  round INT,
+  team1_id INT NOT NULL REFERENCES teams(id),
+  team2_id INT NOT NULL REFERENCES teams(id),
+  team1score INT,
+  team2score INT
 );

@@ -1,16 +1,21 @@
 body{
   font-family: "Helvetica", arial, sans-serif; font-size: 16px;
+  background-color: #3d5d74;
 }
 
-.task {
-  border: 1px solid #ccc;
+
+
+table{
+  border-collapse:collapse;
   width: 300px;
-  min-height: 68px;
-  padding: 10px;
-  display: flex;
-  line-height: 18px;
-  margin-bottom: 10px;
+  border:1px solid #080808;
+  padding: 5px;
 }
+
+table td{
+  padding: 5px;
+  border:1px solid #050505;
+  }
 
 .name {
   font-weight: bold;

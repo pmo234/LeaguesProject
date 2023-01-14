@@ -51,6 +51,20 @@ This is the leagues section
         {% endif %}
         {% endfor %}
     </table>
+    <ul>
+
+        {%for fixture in all_fixtures%}
+        <li>
+
+            {{fixture.team1.name}}
+            {{fixture.team1score}}
+            {{fixture.team2.name}}
+            {{fixture.team2score}}
+            
+        </li>
+        {%endfor%}
+        
+    </ul>
 </div>
 
 {% endblock %}
