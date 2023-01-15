@@ -21,14 +21,14 @@ class Fixture:
             self.team2.draws += 1
             team_repository.update(self.team1)
             team_repository.update(self.team2)
-        if self.team1score >= self.team2score:
+        if self.team1score > self.team2score:
             
             self.team1.wins += 1
             
             self.team2.losses += 1
             team_repository.update(self.team1)
             team_repository.update(self.team2)
-        if self.team1score <= self.team2score:
+        if self.team1score < self.team2score:
             self.team1.losses += 1
             self.team2.wins += 1
             team_repository.update(self.team1)

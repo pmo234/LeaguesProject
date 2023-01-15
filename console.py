@@ -15,17 +15,6 @@ league_repository.save(league1)
 league2 = League("League 2")
 league_repository.save(league2)
 
-team1 = Team("Blackrock",league1, 0,0,0,0)
-team_repository.save(team1)
-team2 = Team("Clontarf", league1, 0,0,0,0)
-team_repository.save(team2)
-team3 = Team("Shannon", league1, 0,0,0,0)
-team_repository.save(team3)
-team4 = Team("Young Munster", league1, 0,0,0,0)
-team_repository.save(team4)
 
-team_repository.select_all()
-
-all_teams = team_repository.select_all()
 
 

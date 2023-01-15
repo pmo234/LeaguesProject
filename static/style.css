@@ -3,7 +3,14 @@ body{
   background-color: #3d5d74;
 }
 
+a { color:black } /* Globally */
 
+/* Each state */
+
+a:visited { text-decoration: none; color:black; }
+a:hover { text-decoration: none; color:blue; }
+a:focus { text-decoration: none; color:yellow; }
+a:hover, a:active { text-decoration: none; color:rgb(239, 210, 210) }
 
 table{
   border-collapse:collapse;
@@ -51,6 +58,15 @@ input, select, button {
 .trash-button{
   display: contents;
   font-size: 65%;
+}
+
+.fixtures {
+  list-style-type: none;
+  margin: 3px;
+  padding: 3px;
+  width:300px;
+  display: inline-table;
+  word-spacing: 7px;
 }
 
 

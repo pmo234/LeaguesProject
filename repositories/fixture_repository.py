@@ -41,7 +41,7 @@ def update_score():
     results = run_sql(sql)
 
     if results ==[]:
-        fixture = Fixture(0,"a","b",0,0)
+        fixture = Fixture(0,"afdfbgbfgbdf","bfgbfgbfgbfgb",0,0)
         fixture.set_fixtures()
     else:
          team1 = team_repository.select(results[len(results)-1]['team1_id'])

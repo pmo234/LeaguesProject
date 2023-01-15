@@ -1,0 +1,23 @@
+{% extends "base.html" %}
+{% block content %}
+All fixtures for {{team.name}}.
+Click on a team below to see their fixtures.
+<!-- {{all_fixtures}} -->
+
+{%for fixture in all_fixtures%}
+    {%if fixture.team1.name == team.name or fixture.team2.name == team.name %}
+    <ul>
+    <li>
+        
+        <a style="text-decoration:none" href="/leagues/{{fixture.team1.id}}/fixtures">{{fixture.team1.name}}</a>
+        {{fixture.team1score}}
+        {{fixture.team2score}}
+        <a style="text-decoration:none" href="/leagues/{{fixture.team2.id}}/fixtures">{{fixture.team2.name}}</a>
+        
+    </li>
+    </ul>
+    {%endif%}
+    
+    {%endfor%}
+
+{% endblock %}

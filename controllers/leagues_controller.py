@@ -43,6 +43,12 @@ def edit_team(id):
     leagues = league_repository.select_all()
     return render_template('leagues/edit.html', team = team, all_leagues = leagues)
 
+@leagues_blueprint.route("/leagues/<id>/fixtures", methods=['GET'])
+def team_fixtures(id):
+    team = team_repository.select(id)
+    fixtures = fixture_repository.select_all()
+    return render_template('leagues/fixtures.html', team = team, all_fixtures = fixtures)
+
 
 
 @leagues_blueprint.route("/leagues/<id>",  methods=['POST'])

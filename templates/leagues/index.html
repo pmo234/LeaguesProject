@@ -18,7 +18,7 @@ This is the leagues section
         {%if team.leagues.name == "League 1" %}
         
         <tr>
-            <td><a href="/leagues/{{team.id}}/edit">{{team.name}}</a></td>
+            <td><a style="text-decoration:none" href="/leagues/{{team.id}}/edit">{{team.name}}</a></td>
             <td>{{team.wins}}</td>
             <td>{{team.draws}}</td>
             <td>{{team.losses}}</td>
@@ -38,28 +38,29 @@ This is the leagues section
             <th>Losses</th>
             <th>Points</th>
         </tr>
-    {%for team in all_teams%}
-    {%if team.leagues.name == "League 2" %}
-    
-    <tr>
-        <td><a href="/leagues/{{team.id}}/edit">{{team.name}}</a></td>
-        <td>{{team.wins}}</td>
-        <td>{{team.draws}}</td>
-        <td>{{team.losses}}</td>
-        <td>{{team.score}}</td>
-    </tr>
-    {% endif %}
-    {% endfor %}
-</table>
-<ul>
+        {%for team in all_teams%}
+        {%if team.leagues.name == "League 2" %}
+        
+        <tr>
+            <td><a style="text-decoration:none" href="/leagues/{{team.id}}/edit">{{team.name}}</a></td>
+            <td>{{team.wins}}</td>
+            <td>{{team.draws}}</td>
+            <td>{{team.losses}}</td>
+            <td>{{team.score}}</td>
+        </tr>
+        {% endif %}
+        {% endfor %}
+    </table>
+    Click on a team name to see all their fixtures.
+    <ul class="fixtures">
     
     {%for fixture in all_fixtures%}
     <li>
         
-        {{fixture.team1.name}}
+        <a style="text-decoration:none" href="/leagues/{{fixture.team1.id}}/fixtures">{{fixture.team1.name}}</a>
         {{fixture.team1score}}
-        {{fixture.team2.name}}
         {{fixture.team2score}}
+        <a style="text-decoration:none" href="/leagues/{{fixture.team2.id}}/fixtures">{{fixture.team2.name}}</a>
         
     </li>
     {%endfor%}
