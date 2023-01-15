@@ -16,7 +16,6 @@ def save(league):
 
 def select_all():
     leagues = []
-    print('select all leagues activated')
     sql = "SELECT * FROM leagues"
     results = run_sql(sql)
 
@@ -40,6 +39,7 @@ def select(id):
 
 
 def delete_all():
+    print("Delete")
     sql = "DELETE  FROM leagues"
     run_sql(sql)
 

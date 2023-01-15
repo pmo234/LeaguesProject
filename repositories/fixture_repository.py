@@ -13,6 +13,7 @@ def save(fixture):
     results = run_sql(sql, values)
     id = results[0]['id']
     fixture.id = id
+    update_score()
     return fixture
 
 
@@ -28,9 +29,28 @@ def select_all():
             team1 = team_repository.select(row['team1_id'])
             team2 = team_repository.select(row['team2_id'])
             fixture = Fixture(row['round'], team1, team2, row['team1score'], row['team2score'], row['id'] )
+            
             fixtures.append(fixture)
         
         return fixtures
+
+def update_score():
+    fixtures = []
+
+    sql = "SELECT * FROM fixtures"
+    results = run_sql(sql)
+
+    if results ==[]:
+        fixture = Fixture(0,"a","b",0,0)
+        fixture.set_fixtures()
+    else:
+         team1 = team_repository.select(results[len(results)-1]['team1_id'])
+         team2 = team_repository.select(results[len(results)-1]['team2_id'])
+         fixture = Fixture(results[len(results)-1]['round'], team1, team2, results[len(results)-1]['team1score'], results[len(results)-1]['team2score'], results[0]['id'] )
+         fixture.calculate_result()
+         fixtures.append(fixture)
+                
+         return fixtures
 
 
 
@@ -48,7 +68,9 @@ def select(id):
 
 
 def delete_all():
-    sql = "DELETE  FROM fixtures"
+    sql = "DELETE FROM fixtures"
+    team_repository.delete_all()
+    
     run_sql(sql)
 
 
@@ -62,6 +84,8 @@ def delete(id):
 def update(fixture):
     sql = "UPDATE fixtures SET (round, team1_id, team2_id, team1score, team2score) = (%s, %s, %s, %s, %s) WHERE id = %s"
     values = [fixture.round, fixture.team1.id, fixture.team2.id, fixture.team1score, fixture.team2score, fixture.id]
+    print(fixture.team1.wins)
+    # values.
     run_sql(sql, values)
 
 # def leagues(fixture):

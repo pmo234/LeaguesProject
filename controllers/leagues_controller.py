@@ -12,7 +12,7 @@ leagues_blueprint = Blueprint("leagues", __name__)
 def teams():
     teams = team_repository.select_all()
     fixtures = fixture_repository.select_all()
-    return render_template("leagues/index.html", all_teams = teams,all_fixtures=fixtures)
+    return render_template("leagues/index.html", all_teams = teams ,all_fixtures=fixtures)
 
 @leagues_blueprint.route("/leagues/new")
 def leagues():
@@ -43,9 +43,12 @@ def edit_team(id):
     leagues = league_repository.select_all()
     return render_template('leagues/edit.html', team = team, all_leagues = leagues)
 
+
+
 @leagues_blueprint.route("/leagues/<id>",  methods=['POST'])
 def update_team(id):
-    
+
+    print(request.form)
     name = request.form['name']
     league_id = request.form['league_id']
     wins = request.form['wins']
@@ -58,8 +61,22 @@ def update_team(id):
     team_repository.update(team)
     return redirect('/leagues')
 
+@leagues_blueprint.route("/leagues/<id>/editpoints",  methods=['POST'])
+def update_points(id):
+    
+    fixture_repository.update_score()
+
+    return redirect('/leagues')
+
+@leagues_blueprint.route("/leagues/<id>/deletefixtures",  methods=['POST'])
+def delete_fixtures(id):
+    
+    fixture_repository.delete_all()
+
+    return redirect('/leagues')
+
 @leagues_blueprint.route("/leagues/<id>/delete", methods=['POST'])
 def delete_team(id):
-    print('delete controller')
     team_repository.delete(id)
     return redirect('/leagues')
+

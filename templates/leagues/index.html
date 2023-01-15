@@ -14,15 +14,15 @@ This is the leagues section
             <th>Losses</th>
             <th>Points</th>
         </tr>
-    {%for team in all_teams%}
-    {%if team.leagues.name == "League 1" %}
-    
+        {%for team in all_teams%}
+        {%if team.leagues.name == "League 1" %}
+        
         <tr>
-          <td><a href="/leagues/{{team.id}}/edit">{{team.name}}</a></td>
-          <td>{{team.wins}}</td>
-          <td>{{team.draws}}</td>
-          <td>{{team.losses}}</td>
-          <td>{{team.score}}</td>
+            <td><a href="/leagues/{{team.id}}/edit">{{team.name}}</a></td>
+            <td>{{team.wins}}</td>
+            <td>{{team.draws}}</td>
+            <td>{{team.losses}}</td>
+            <td>{{team.score}}</td>
         </tr>
         {% endif %}
         {% endfor %}
@@ -41,30 +41,40 @@ This is the leagues section
     {%for team in all_teams%}
     {%if team.leagues.name == "League 2" %}
     
-        <tr>
-          <td><a href="/leagues/{{team.id}}/edit">{{team.name}}</a></td>
-          <td>{{team.wins}}</td>
-          <td>{{team.draws}}</td>
-          <td>{{team.losses}}</td>
-          <td>{{team.score}}</td>
-        </tr>
-        {% endif %}
-        {% endfor %}
-    </table>
-    <ul>
-
-        {%for fixture in all_fixtures%}
-        <li>
-
-            {{fixture.team1.name}}
-            {{fixture.team1score}}
-            {{fixture.team2.name}}
-            {{fixture.team2score}}
-            
-        </li>
-        {%endfor%}
+    <tr>
+        <td><a href="/leagues/{{team.id}}/edit">{{team.name}}</a></td>
+        <td>{{team.wins}}</td>
+        <td>{{team.draws}}</td>
+        <td>{{team.losses}}</td>
+        <td>{{team.score}}</td>
+    </tr>
+    {% endif %}
+    {% endfor %}
+</table>
+<ul>
+    
+    {%for fixture in all_fixtures%}
+    <li>
         
-    </ul>
+        {{fixture.team1.name}}
+        {{fixture.team1score}}
+        {{fixture.team2.name}}
+        {{fixture.team2score}}
+        
+    </li>
+    {%endfor%}
+    
+</ul>
+
+<form action="/leagues/0/editpoints" method="post">
+    <button type="submit">Submit Scores</button>
+</form>
+
+<form action="/leagues/0/deletefixtures" method="post">
+    <button type="submit">Reset Table</button>
+</form>
+
+
 </div>
 
 {% endblock %}
