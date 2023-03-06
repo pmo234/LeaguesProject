@@ -39,7 +39,11 @@ This was for my python project at Codeclan.
 ## DEMO
 
 
-https://user-images.githubusercontent.com/114186386/219321758-3a7163e2-cbb1-4437-a29c-973c4f2c57f5.mp4
+
+
+https://user-images.githubusercontent.com/98908560/223095608-f12da077-0191-471a-9dac-380b8677ae3e.mov
+
+
 
 
 
