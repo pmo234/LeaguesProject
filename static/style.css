@@ -9,7 +9,7 @@ a { color:black } /* Globally */
 
 a:visited { text-decoration: none; color:black; }
 a:hover { text-decoration: none; color:blue; }
-a:focus { text-decoration: none; color:yellow; }
+a:focus { text-decoration: none; color:rgb(239, 239, 214); }
 a:hover, a:active { text-decoration: none; color:rgb(239, 210, 210) }
 
 table{
@@ -28,6 +28,7 @@ table td{
   font-weight: bold;
   margin-bottom: 0.5em;
   margin-right: 0.3em;
+  color:white
 }
 
 .duration{
@@ -102,3 +103,7 @@ input, select, button {
   width: 300px;
   margin: 0 auto;
 }
+
+@tailwind base;
+@tailwind components;
+@tailwind utilities;

@@ -2,6 +2,7 @@ from flask import Flask, render_template, request, redirect
 from flask import Blueprint
 from models.league import League
 from models.team import Team
+
 import repositories.league_repository as league_repository
 import repositories.team_repository as team_repository
 import repositories.fixture_repository as fixture_repository
@@ -13,6 +14,15 @@ def teams():
     teams = team_repository.select_all()
     fixtures = fixture_repository.select_all()
     return render_template("leagues/index.html", all_teams = teams ,all_fixtures=fixtures)
+
+@leagues_blueprint.route("/leagues/inputscores")
+def input_scores():
+    
+    fixture_repository.update_score()
+    teams = team_repository.select_all()
+    fixtures = fixture_repository.select_all()
+
+    return render_template("leagues/inputscores.html", all_teams = teams ,all_fixtures=fixtures)
 
 @leagues_blueprint.route("/leagues/new")
 def leagues():
@@ -70,7 +80,15 @@ def update_team(id):
 @leagues_blueprint.route("/leagues/<id>/editpoints",  methods=['POST'])
 def update_points(id):
     
+    fixture_repository.delete_all()
     fixture_repository.update_score()
+
+    return redirect('/leagues')
+
+@leagues_blueprint.route("/leagues/<id>/submituserscores",  methods=['POST'])
+def submit_user_scores(id):
+
+    fixture_repository.input_score(request.form)
 
     return redirect('/leagues')
 

@@ -12,8 +12,8 @@ league_repository.delete_all()
 team_repository.delete_all()
 league1 = League("League 1")
 league_repository.save(league1)
-league2 = League("League 2")
-league_repository.save(league2)
+# league2 = League("League 2")
+# league_repository.save(league2)
 
 
 

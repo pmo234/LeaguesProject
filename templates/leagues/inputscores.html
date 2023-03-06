@@ -1,0 +1,41 @@
+{% extends "base.html" %}
+{% block content %}
+
+
+
+<form action="/leagues/0/submituserscores" method="post">
+
+    </table>
+    Click on a team name to see all their fixtures.
+        <ul class="fixtures">
+            
+            {%for fixture in all_fixtures%}
+                Match {{ loop.index }}
+                <li>
+                    
+                    <a style="text-decoration:none" href="/leagues/{{fixture.team1.id}}/fixtures">{{fixture.team1.name}}</a>
+                    <div>
+                        <label for="score1"></label>
+                        <input type="text" id="a{{ loop.index }}" name="a{{ loop.index }}" placeholder="Score 1" required autofocus>
+                    </div>
+                    <div>
+                        <label for="name"></label>
+                        <input type="text" id="b{{ loop.index }}" name="b{{ loop.index }}" placeholder="Score 2" required autofocus>
+                    </div>
+                    <a style="text-decoration:none" href="/leagues/{{fixture.team2.id}}/fixtures">{{fixture.team2.name}}</a>
+                    
+                </li>
+                
+            {%endfor%}
+        
+        </ul>
+    <button type="submit">Submit user scores</button>
+
+    
+    
+    
+</div>
+</form>
+
+{% endblock %}
+

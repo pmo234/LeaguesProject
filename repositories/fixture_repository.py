@@ -52,6 +52,28 @@ def update_score():
                 
          return fixtures
 
+def input_score(scores):
+    print(scores)
+    delete_all()
+    fixture = Fixture(0,"afdfbgbfgbdf","bfgbfgbfgbfgb",0,0)
+    fixture.input_fixtures(scores)
+    
+
+    # sql = "SELECT * FROM fixtures"
+    # results = run_sql(sql)
+
+    # if results ==[]:
+    #     fixture = Fixture(0,"afdfbgbfgbdf","bfgbfgbfgbfgb",0,0)
+    #     fixture.set_fixtures()
+    # else:
+    #      team1 = team_repository.select(results[len(results)-1]['team1_id'])
+    #      team2 = team_repository.select(results[len(results)-1]['team2_id'])
+    #      fixture = Fixture(results[len(results)-1]['round'], team1, team2, results[len(results)-1]['team1score'], results[len(results)-1]['team2score'], results[0]['id'] )
+    #      fixture.calculate_result()
+    #      fixtures.append(fixture)
+                
+    #      return fixtures
+
 
 
 def select(id):
@@ -69,7 +91,9 @@ def select(id):
 
 def delete_all():
     sql = "DELETE FROM fixtures"
-    team_repository.delete_all()
+    fixture = Fixture(0,"afdfbgbfgbdf","bfgbfgbfgbfgb",0,0)
+    fixture.reset_table()
+    
     
     run_sql(sql)
 

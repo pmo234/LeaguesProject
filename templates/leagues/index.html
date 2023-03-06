@@ -2,9 +2,9 @@
 {% block content %}
 
 
-This is the leagues section 
+Click on a team in the league to edit the team information.
 
-<div class="league">
+<div class="league" className="mt-20">
     League 1
     <table>
         <tr>
@@ -18,7 +18,7 @@ This is the leagues section
         {%if team.leagues.name == "League 1" %}
         
         <tr>
-            <td><a style="text-decoration:none" href="/leagues/{{team.id}}/edit">{{team.name}}</a></td>
+            <td><a style="text-decoration:none" className="p-20" href="/leagues/{{team.id}}/edit">{{team.name}}</a></td>
             <td>{{team.wins}}</td>
             <td>{{team.draws}}</td>
             <td>{{team.losses}}</td>
@@ -28,35 +28,13 @@ This is the leagues section
         {% endfor %}
     </table>
 </div>
-<div class="league">
-    League 2
-    <table>
-        <tr>
-            <th>Team</th>
-            <th>Wins</th>
-            <th>Draws</th>
-            <th>Losses</th>
-            <th>Points</th>
-        </tr>
-        {%for team in all_teams%}
-        {%if team.leagues.name == "League 2" %}
-        
-        <tr>
-            <td><a style="text-decoration:none" href="/leagues/{{team.id}}/edit">{{team.name}}</a></td>
-            <td>{{team.wins}}</td>
-            <td>{{team.draws}}</td>
-            <td>{{team.losses}}</td>
-            <td>{{team.score}}</td>
-        </tr>
-        {% endif %}
-        {% endfor %}
-    </table>
+
     Click on a team name to see all their fixtures.
     <ul class="fixtures">
     
     {%for fixture in all_fixtures%}
     <li>
-        
+        Match {{ loop.index }}:
         <a style="text-decoration:none" href="/leagues/{{fixture.team1.id}}/fixtures">{{fixture.team1.name}}</a>
         {{fixture.team1score}}
         {{fixture.team2score}}
@@ -68,11 +46,15 @@ This is the leagues section
 </ul>
 
 <form action="/leagues/0/editpoints" method="post">
-    <button type="submit">Submit Scores</button>
+    <button type="submit">Create Fixtures Random Scores</button>
+</form>
+
+<form action="/leagues/inputscores" method="get">
+    <button type="submit">Create Fixtures Input Scores</button>
 </form>
 
 <form action="/leagues/0/deletefixtures" method="post">
-    <button type="submit">Reset Table</button>
+    <button type="submit">Delete Fixtures</button>
 </form>
 
 
